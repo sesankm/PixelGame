@@ -27,7 +27,7 @@ void Game::add_layer(char* file_name, char* image_path) {
 
 void Game::update() {
 	for (int i = 0; i < layers.size(); i++)
-		layers[i].update((*p).camera, (*p).get_vel_x(), (*p).get_vel_y());
+		layers[i].update((*p).camera, (*p).get_x_vel(), (*p).get_y_vel());
 	(*p).update();
 }
 

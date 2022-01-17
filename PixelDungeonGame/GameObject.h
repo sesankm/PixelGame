@@ -5,12 +5,12 @@
 #include <iostream>
 #include <string>
 
-typedef enum Direction {
-	Up = 1,
-	Down = 2,
-	Left = 3,
-	Right = 4
-} Direction;
+enum class Direction {
+	Up,
+	Down,
+	Left,
+	Right
+};
 
 class GameObject {
 protected:
@@ -20,28 +20,35 @@ protected:
 	SDL_Texture* texture;
 	int texture_width, texture_height;
 public:
+	GameObject();
+	GameObject(SDL_Renderer* rend, char* sprite_sheet_path, int texture_rows, int texture_cols, int start_x, int start_y, int width, int height);
 	SDL_Rect collision_rect;
 	virtual void update() = 0;
 };
 
+
 class Player : public GameObject {
 private:
 	int max_vel;
-	int flip = 0;
+	int frame_tick;
+	SDL_RendererFlip flip;
 	Direction dir;
 public:
 	std::vector<int> vel{ 0, 0 };
 	SDL_Rect camera;
 
 public:
-	Player(SDL_Renderer* rend, char* sprite_sheet_path);
+	Player(SDL_Renderer* rend, char* sprite_sheet_path) ;
 	void update();
 	void keyDown(SDL_Keycode code);
 	void keyUp(SDL_Keycode code);
-	int getX();
-	int getY();
-	int get_vel_x();
-	int get_vel_y();
+	int get_x_pos();
+	int get_y_pos();
+	int get_x_vel();
+	int get_y_vel();
+private:
+	void update_position();
+	void update_frame();
 };
 
 class Tile : public GameObject {
