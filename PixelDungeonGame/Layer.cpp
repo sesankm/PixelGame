@@ -36,18 +36,19 @@ void Layer::create_layer(char* image_path, SDL_Renderer* renderer) {
 	}
 }
 
-void Layer::update(SDL_Rect camera, int vel_x, int vel_y) {
+void Layer::update(Player player) {
 	for (int i = 0; i < map.size(); i++) {
 		for (int j = 0; j < map[i].size(); j++) {
-			layer_tiles[i][j].check(camera, vel_x, vel_y);
-			SDL_Rect o = (*layer_tiles[i][j].getPos());
-			int x1 = o.x;
-			int x2 = o.x + o.w;
-			int y1 = o.y;
-			int y2 = o.y + o.h;
+			layer_tiles[i][j].check(player.camera, player.vel[0], player.vel[1]);
 
-			if(x1 >= camera.x - 70 && x2 <= camera.x + camera.w + 70 && y1 >= camera.y - 70 && y2 <= camera.y + camera.h + 70)
+			SDL_Rect tile_position = (*layer_tiles[i][j].getPos());
+			if (tile_position.x >= player.camera.x - 70
+				&& tile_position.x + tile_position.w <= player.camera.x + player.camera.w + 70
+				&& tile_position.y >= player.camera.y - 70
+				&& tile_position.y + tile_position.h <= player.camera.y + player.camera.h + 70)
+			{
 				layer_tiles[i][j].update();
+			}
 		}
 	}
 }

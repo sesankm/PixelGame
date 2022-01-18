@@ -33,6 +33,7 @@ private:
 	int frame_tick;
 	SDL_RendererFlip flip;
 	Direction dir;
+
 public:
 	std::vector<int> vel{ 0, 0 };
 	SDL_Rect camera;
@@ -69,5 +70,5 @@ public:
 	Layer(SDL_Renderer* renderer, char* file_name, char* image_path);
 	void read_file(char* file_name);
 	void create_layer(char* image_path, SDL_Renderer* renderer);
-	void update(SDL_Rect camera, int vel_x, int vel_y);
+	void update(Player player);
 };

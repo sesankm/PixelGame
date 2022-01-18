@@ -4,23 +4,21 @@ Player::Player(SDL_Renderer* rend, char* sprite_sheet_path) : GameObject(rend, s
 	max_vel = 10;
 	dir = Direction::Right;
 	frame_tick = 0;
-	flip = SDL_FLIP_NONE;
+	flip = SDL_RendererFlip::SDL_FLIP_NONE;
+	vel = { 0, 0 };
 }
 
 void Player::update_position() {
-	// update x
 	if (vel[0] > 0 && camera.x + camera.w <= 900)
 		pos_rect.x += vel[0];
 	else if (vel[0] < 0 && camera.x >= 0)
 		pos_rect.x += vel[0];
 
-	// update y
 	if (vel[1] > 0 && camera.y + camera.h <= 700)
 		pos_rect.y += vel[1];
 	else if (vel[1] < 0 && camera.y >= 0)
 		pos_rect.y += vel[1];
 
-	// update collision
 	collision_rect = { pos_rect.x + 10, pos_rect.y + 20, pos_rect.w - 20, pos_rect.h - 20 };
 	camera.x = pos_rect.x + 70 - camera.w / 2;
 	camera.y = pos_rect.y + 70 - camera.h / 2;
@@ -45,6 +43,10 @@ void Player::update() {
 	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_RenderDrawRect(renderer, &collision_rect);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	SDL_RenderDrawRect(renderer, &camera);
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 

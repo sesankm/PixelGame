@@ -3,9 +3,9 @@
 Game::Game(char* window_name, int win_x, int win_y, int win_w, int win_h) {
 	window = SDL_CreateWindow(window_name, win_x, win_y, win_w, win_h, SDL_WINDOW_RESIZABLE);
 	renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED);
-	p = new Player(renderer, (char*)"fHero_.png");
-	(*p).camera.w = 900;
-	(*p).camera.h = 700;
+	player = new Player(renderer, (char*)"fHero_.png");
+	(*player).camera.w = 900;
+	(*player).camera.h = 700;
 }
 
 int Game::handle_event() {
@@ -13,10 +13,10 @@ int Game::handle_event() {
 		return 1;
 	}
 	else if (event.type == SDL_KEYDOWN) {
-		(*p).keyDown(event.key.keysym.sym);
+		(*player).keyDown(event.key.keysym.sym);
 	}
 	else if (event.type == SDL_KEYUP) {
-		(*p).keyUp(event.key.keysym.sym);
+		(*player).keyUp(event.key.keysym.sym);
 	}
 	return 0;
 }
@@ -27,8 +27,8 @@ void Game::add_layer(char* file_name, char* image_path) {
 
 void Game::update() {
 	for (int i = 0; i < layers.size(); i++)
-		layers[i].update((*p).camera, (*p).get_x_vel(), (*p).get_y_vel());
-	(*p).update();
+		layers[i].update(*player);
+	(*player).update();
 }
 
 void Game::render() {
