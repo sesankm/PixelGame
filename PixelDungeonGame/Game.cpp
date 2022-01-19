@@ -61,12 +61,7 @@ void Game::render() {
 
 				player->vel_x = 0;
 				player->vel_y = 0;
-				printf("asdfsadf\n");
 			}
-
-			SDL_SetRenderDrawColor(renderer, 10, 210, 10, 255);
-			SDL_RenderDrawRect(renderer, &layers[1].layer_tiles[i][j].collision_rect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		}
 	}
 

@@ -41,15 +41,6 @@ void Player::update_frame() {
 void Player::update() {
 	Player::update_position();
 	Player::update_frame();
-
-	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	SDL_RenderDrawRect(renderer, &collision_rect);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	SDL_RenderDrawRect(renderer, &camera);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
 void Player::key_down(SDL_Keycode code) {

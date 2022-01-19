@@ -5,6 +5,7 @@ Layer::Layer(SDL_Renderer* renderer, char* file_name, char* image_path) {
 	create_layer(image_path, renderer);
 	map_left = layer_tiles[0][0].get_pos();
 	map_right = layer_tiles[layer_tiles.size() - 1][layer_tiles[layer_tiles.size() - 1].size() - 1].get_pos();
+	collision_layer = false;
 }
 
 void Layer::read_file(char* file_name) {

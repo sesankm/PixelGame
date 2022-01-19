@@ -11,11 +11,11 @@
 class Game {
 public:
 	Player* player;
+	std::vector<Layer> layers;
 
 private:
 	SDL_Renderer* renderer;
 	SDL_Window* window;
-	std::vector<Layer> layers;
 	SDL_Event event;
 
 public:

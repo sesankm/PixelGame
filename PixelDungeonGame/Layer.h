@@ -8,6 +8,7 @@ private:
 public:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<Tile>> layer_tiles;
+	bool collision_layer;
 public:
 	Layer(SDL_Renderer* renderer, char* file_name, char* image_path);
 	void read_file(char* file_name);
