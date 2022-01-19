@@ -52,8 +52,7 @@ public:
 	Tile(SDL_Renderer*, char*, int, int, int, int, int, int, int);
 	void update();
 	void reposition(SDL_Rect, int, int);
-	SDL_Rect* getPos();
-	bool show;
+	SDL_Rect get_pos();
 };
 
 class Layer {

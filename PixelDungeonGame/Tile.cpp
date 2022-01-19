@@ -22,6 +22,6 @@ void Tile::update() {
 	SDL_RenderCopy(renderer, texture, &frame_rect, &pos_rect);
 }
 
-SDL_Rect* Tile::getPos() {
-	return &pos_rect;
+SDL_Rect Tile::get_pos() {
+	return pos_rect;
 }
