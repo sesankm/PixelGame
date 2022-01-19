@@ -66,7 +66,7 @@ void Game::render() {
 
 			SDL_SetRenderDrawColor(renderer, 10, 210, 10, 255);
 			SDL_RenderDrawRect(renderer, &layers[1].layer_tiles[i][j].collision_rect);
-			SDL_SetRenderDrawColor(renderer, 210, 210, 210, 255);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		}
 	}
 
