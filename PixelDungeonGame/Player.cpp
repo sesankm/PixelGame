@@ -5,19 +5,20 @@ Player::Player(SDL_Renderer* rend, char* sprite_sheet_path) : GameObject(rend, s
 	dir = Direction::Right;
 	frame_tick = 0;
 	flip = SDL_RendererFlip::SDL_FLIP_NONE;
-	vel = { 0, 0 };
+	vel_x = 0;
+	vel_y = 0;
 }
 
 void Player::update_position() {
-	if (vel[0] > 0 && camera.x + camera.w <= 900)
-		pos_rect.x += vel[0];
-	else if (vel[0] < 0 && camera.x >= 0)
-		pos_rect.x += vel[0];
+	if (vel_x > 0 && camera.x + camera.w <= 900)
+		pos_rect.x += vel_x;
+	else if (vel_x < 0 && camera.x >= 0)
+		pos_rect.x += vel_x;
 
-	if (vel[1] > 0 && camera.y + camera.h <= 700)
-		pos_rect.y += vel[1];
-	else if (vel[1] < 0 && camera.y >= 0)
-		pos_rect.y += vel[1];
+	if (vel_y > 0 && camera.y + camera.h <= 700)
+		pos_rect.y += vel_y;
+	else if (vel_y < 0 && camera.y >= 0)
+		pos_rect.y += vel_y;
 
 	collision_rect = { pos_rect.x + 10, pos_rect.y + 20, pos_rect.w - 20, pos_rect.h - 20 };
 	camera.x = pos_rect.x + 70 - camera.w / 2;
@@ -27,7 +28,7 @@ void Player::update_position() {
 void Player::update_frame() {
 	frame_rect.y = 0;
 	frame_tick++;
-	if (vel[0] != 0 || vel[1] != 0)
+	if (vel_x != 0 || vel_y != 0)
 		frame_rect.y = frame_rect.h * 2;
 	if (frame_tick == 3) {
 		frame_rect.x += frame_rect.w;
@@ -53,36 +54,36 @@ void Player::update() {
 void Player::keyDown(SDL_Keycode code) {
 	if (code == SDLK_d) {
 		dir = Direction::Right;
-		vel[0] = max_vel;
+		vel_x = max_vel;
 		flip = SDL_FLIP_NONE;
 	}
 	else if (code == SDLK_a) {
 		dir = Direction::Left;
-		vel[0] = -max_vel;
+		vel_x = -max_vel;
 		flip = SDL_FLIP_HORIZONTAL;
 	}
 	else if (code == SDLK_w) {
 		dir = Direction::Up;
-		vel[1] = -max_vel;
+		vel_y = -max_vel;
 	}
 	else if (code == SDLK_s) {
 		dir = Direction::Down;
-		vel[1] = max_vel;
+		vel_y = max_vel;
 	}
 }
 
 void Player::keyUp(SDL_Keycode code) {
 	if (code == SDLK_d && dir != Direction::Left) {
-		vel[0] = 0;
+		vel_x = 0;
 	}
 	else if (code == SDLK_a && dir != Direction::Right) {
-		vel[0] = 0;
+		vel_x = 0;
 	}
 	else if (code == SDLK_w && dir != Direction::Down) {
-		vel[1] = 0;
+		vel_y = 0;
 	}
 	else if (code == SDLK_s && dir != Direction::Up) {
-		vel[1] = 0;
+		vel_y = 0;
 	}
 }
 
@@ -96,8 +97,4 @@ int Player::get_y_pos() {
 
 std::vector<int> Player::get_pos() {
 	return std::vector<int>{pos_rect.x, pos_rect.y};
-}
-
-std::vector<int> Player::get_vel() {
-	return vel;
 }

@@ -33,9 +33,8 @@ private:
 	int frame_tick;
 	SDL_RendererFlip flip;
 	Direction dir;
-
 public:
-	std::vector<int> vel{ 0, 0 };
+	int vel_x, vel_y;
 	SDL_Rect camera;
 
 public:
