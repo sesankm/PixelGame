@@ -40,8 +40,8 @@ public:
 public:
 	Player(SDL_Renderer* rend, char* sprite_sheet_path) ;
 	void update();
-	void keyDown(SDL_Keycode code);
-	void keyUp(SDL_Keycode code);
+	void key_down(SDL_Keycode code);
+	void key_up(SDL_Keycode code);
 private:
 	void update_position();
 	void update_frame();
@@ -51,10 +51,8 @@ class Tile : public GameObject {
 public:
 	Tile(SDL_Renderer*, char*, int, int, int, int, int, int, int);
 	void update();
-	void check(SDL_Rect, int, int);
-	SDL_Texture* getTexture();
+	void reposition(SDL_Rect, int, int);
 	SDL_Rect* getPos();
-	SDL_Rect* getFrame();
 	bool show;
 };
 

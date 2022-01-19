@@ -39,7 +39,7 @@ void Layer::create_layer(char* image_path, SDL_Renderer* renderer) {
 void Layer::update(Player player) {
 	for (int i = 0; i < map.size(); i++) {
 		for (int j = 0; j < map[i].size(); j++) {
-			layer_tiles[i][j].check(player.camera, player.vel_x, player.vel_y);
+			layer_tiles[i][j].reposition(player.camera, player.vel_x, player.vel_y);
 
 			SDL_Rect tile_position = (*layer_tiles[i][j].getPos());
 			if (tile_position.x >= player.camera.x - 70

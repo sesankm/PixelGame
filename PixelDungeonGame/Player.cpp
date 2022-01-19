@@ -53,7 +53,7 @@ void Player::update() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void Player::keyDown(SDL_Keycode code) {
+void Player::key_down(SDL_Keycode code) {
 	if (code == SDLK_d) {
 		dir = Direction::Right;
 		vel_x = max_vel;
@@ -74,7 +74,7 @@ void Player::keyDown(SDL_Keycode code) {
 	}
 }
 
-void Player::keyUp(SDL_Keycode code) {
+void Player::key_up(SDL_Keycode code) {
 	if (code == SDLK_d && dir != Direction::Left) {
 		vel_x = 0;
 	}

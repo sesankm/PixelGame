@@ -7,7 +7,7 @@ Tile::Tile(SDL_Renderer* rend, char* tileset_path, int tile_width, int tile_heig
 	frame_rect = { tile_num % 19 * tile_height, tile_num / 19 * tile_width, tile_width, tile_height };
 }
 
-void Tile::check(SDL_Rect camera, int vel_x, int vel_y) {
+void Tile::reposition(SDL_Rect camera, int vel_x, int vel_y) {
 	if (camera.x + camera.w >= 900 && vel_x > 0)
 		pos_rect.x -= 10;
 	if (camera.x <= 0 && vel_x < 0)
@@ -22,12 +22,6 @@ void Tile::update() {
 	SDL_RenderCopy(renderer, texture, &frame_rect, &pos_rect);
 }
 
-SDL_Texture* Tile::getTexture() {
-	return texture;
-}
 SDL_Rect* Tile::getPos() {
 	return &pos_rect;
-}
-SDL_Rect* Tile::getFrame() {
-	return &frame_rect;
 }

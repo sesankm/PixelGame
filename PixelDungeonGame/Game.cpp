@@ -13,10 +13,10 @@ int Game::handle_event() {
 		return 1;
 	}
 	else if (event.type == SDL_KEYDOWN) {
-		(*player).keyDown(event.key.keysym.sym);
+		(*player).key_down(event.key.keysym.sym);
 	}
 	else if (event.type == SDL_KEYUP) {
-		(*player).keyUp(event.key.keysym.sym);
+		(*player).key_up(event.key.keysym.sym);
 	}
 	return 0;
 }
