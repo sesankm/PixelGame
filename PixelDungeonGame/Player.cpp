@@ -7,6 +7,7 @@ Player::Player(SDL_Renderer* rend, char* sprite_sheet_path) : GameObject(rend, s
 	flip = SDL_RendererFlip::SDL_FLIP_NONE;
 	vel_x = 0;
 	vel_y = 0;
+	update_position();
 }
 
 void Player::update_position() {
@@ -39,8 +40,9 @@ void Player::update_frame() {
 }
 
 void Player::update() {
-	update_position();
-	update_frame();
+	Player::update_position();
+	Player::update_frame();
+
 	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_RenderDrawRect(renderer, &collision_rect);
@@ -85,16 +87,4 @@ void Player::keyUp(SDL_Keycode code) {
 	else if (code == SDLK_s && dir != Direction::Up) {
 		vel_y = 0;
 	}
-}
-
-int Player::get_x_pos() {
-	return pos_rect.x;
-}
-
-int Player::get_y_pos() {
-	return pos_rect.y;
-}
-
-std::vector<int> Player::get_pos() {
-	return std::vector<int>{pos_rect.x, pos_rect.y};
 }

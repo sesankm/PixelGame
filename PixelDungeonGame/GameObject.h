@@ -42,10 +42,6 @@ public:
 	void update();
 	void keyDown(SDL_Keycode code);
 	void keyUp(SDL_Keycode code);
-	int get_x_pos();
-	int get_y_pos();
-	std::vector<int> get_vel();
-	std::vector<int> get_pos();
 private:
 	void update_position();
 	void update_frame();
