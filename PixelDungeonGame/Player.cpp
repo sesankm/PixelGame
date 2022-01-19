@@ -41,6 +41,7 @@ void Player::update_frame() {
 void Player::update() {
 	Player::update_position();
 	Player::update_frame();
+	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
 }
 
 void Player::key_down(SDL_Keycode code) {
