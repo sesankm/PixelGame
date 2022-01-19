@@ -3,6 +3,8 @@
 Layer::Layer(SDL_Renderer* renderer, char* file_name, char* image_path) {
 	read_file(file_name);
 	create_layer(image_path, renderer);
+	map_left = layer_tiles[0][0].get_pos();
+	map_right = layer_tiles[layer_tiles.size() - 1][layer_tiles[layer_tiles.size() - 1].size() - 1].get_pos();
 }
 
 void Layer::read_file(char* file_name) {
@@ -40,9 +42,14 @@ void Layer::update(Player player) {
 	SDL_Rect tile_position;
 	for (int i = 0; i < map.size(); i++) {
 		for (int j = 0; j < map[i].size(); j++) {
-			layer_tiles[i][j].reposition(player.camera, player.vel_x, player.vel_y);
-			tile_position = layer_tiles[i][j].get_pos();
+			int vel_x = 0, vel_y = 0;
+			if (player.collision_rect.x > map_left.x && player.collision_rect.x + player.collision_rect.w < map_right.x + map_right.w) 
+				vel_x = player.vel_x;
+			if (player.collision_rect.y > map_left.y && player.collision_rect.y + player.collision_rect.h < map_right.y + map_right.w)
+				vel_y = player.vel_y;
+			layer_tiles[i][j].reposition(player.camera, vel_x, vel_y);
 
+			tile_position = layer_tiles[i][j].get_pos();
 			if (tile_position.x >= player.camera.x - 70
 				&& tile_position.x + tile_position.w <= player.camera.x + player.camera.w + 70
 				&& tile_position.y >= player.camera.y - 70
@@ -52,4 +59,6 @@ void Layer::update(Player player) {
 			}
 		}
 	}
+	map_left = layer_tiles[0][0].get_pos();
+	map_right = layer_tiles[layer_tiles.size() - 1][layer_tiles[layer_tiles.size() - 1].size() - 1].get_pos();
 }

@@ -26,7 +26,6 @@ public:
 	virtual void update() = 0;
 };
 
-
 class Player : public GameObject {
 private:
 	int max_vel;
@@ -56,9 +55,12 @@ public:
 };
 
 class Layer {
-public:
+private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<Tile>> layer_tiles;
+	SDL_Rect map_left;
+	SDL_Rect map_right;
+public:
 	Layer(SDL_Renderer* renderer, char* file_name, char* image_path);
 	void read_file(char* file_name);
 	void create_layer(char* image_path, SDL_Renderer* renderer);
