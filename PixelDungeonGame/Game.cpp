@@ -32,6 +32,39 @@ void Game::update() {
 }
 
 void Game::render() {
+	for (int i = 0; i < layers[1].layer_tiles.size(); i++) {
+		for (int j = 0; j < layers[1].layer_tiles[i].size(); j++) {
+			int map_num = layers[1].map[i][j];
+			if (map_num != -1) {
+				layers[1].layer_tiles[i][j].collision_rect.x = layers[1].layer_tiles[i][j].get_pos().x;
+				layers[1].layer_tiles[i][j].collision_rect.y = layers[1].layer_tiles[i][j].get_pos().y;
+				layers[1].layer_tiles[i][j].collision_rect.w = layers[1].layer_tiles[i][j].get_pos().w;
+				layers[1].layer_tiles[i][j].collision_rect.h = layers[1].layer_tiles[i][j].get_pos().h;
+			}
+			if (map_num == 275 || map_num == 277 || map_num == 279 || map_num == 281) {
+				layers[1].layer_tiles[i][j].collision_rect.x = layers[1].layer_tiles[i][j].collision_rect.x + layers[1].layer_tiles[i][j].collision_rect.w / 2;
+				layers[1].layer_tiles[i][j].collision_rect.w /= 2;
+			}
+			else if (map_num == 276 || map_num == 278 || map_num == 280 || map_num == 282) {
+				layers[1].layer_tiles[i][j].collision_rect.w /= 2;
+			}
+			else if (map_num <= 244 && map_num >= 237) {
+				layers[1].layer_tiles[i][j].collision_rect.y = layers[1].layer_tiles[i][j].collision_rect.y + layers[1].layer_tiles[i][j].collision_rect.h / 2;
+				layers[1].layer_tiles[i][j].collision_rect.h /= 2;
+			}
+
+			if (SDL_HasIntersection(&(player->collision_rect), &layers[1].layer_tiles[i][j].collision_rect)) {
+				player->vel_x = 0;
+				player->vel_y = 0;
+				printf("asdfsadf\n");
+			}
+
+			SDL_SetRenderDrawColor(renderer, 10, 210, 10, 255);
+			SDL_RenderDrawRect(renderer, &layers[1].layer_tiles[i][j].collision_rect);
+			SDL_SetRenderDrawColor(renderer, 210, 210, 210, 255);
+		}
+	}
+
 	SDL_RenderPresent(renderer);
 }
 

@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "Layer.h"
 
 Layer::Layer(SDL_Renderer* renderer, char* file_name, char* image_path) {
 	read_file(file_name);
@@ -43,7 +43,7 @@ void Layer::update(Player player) {
 	for (int i = 0; i < map.size(); i++) {
 		for (int j = 0; j < map[i].size(); j++) {
 			int vel_x = 0, vel_y = 0;
-			if (player.collision_rect.x > map_left.x && player.collision_rect.x + player.collision_rect.w < map_right.x + map_right.w) 
+			if (player.collision_rect.x > map_left.x && player.collision_rect.x + player.collision_rect.w < map_right.x + map_right.w)
 				vel_x = player.vel_x;
 			if (player.collision_rect.y > map_left.y && player.collision_rect.y + player.collision_rect.h < map_right.y + map_right.w)
 				vel_y = player.vel_y;

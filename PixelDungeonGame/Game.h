@@ -6,6 +6,7 @@
 #endif
 
 #include "GameObject.h"
+#include "Layer.h"
 
 class Game {
 public:

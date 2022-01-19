@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL.h>
 #include <SDL_image.h>
 #include <vector>
@@ -52,17 +53,4 @@ public:
 	void update();
 	void reposition(SDL_Rect, int, int);
 	SDL_Rect get_pos();
-};
-
-class Layer {
-private:
-	std::vector<std::vector<int>> map;
-	std::vector<std::vector<Tile>> layer_tiles;
-	SDL_Rect map_left;
-	SDL_Rect map_right;
-public:
-	Layer(SDL_Renderer* renderer, char* file_name, char* image_path);
-	void read_file(char* file_name);
-	void create_layer(char* image_path, SDL_Renderer* renderer);
-	void update(Player player);
 };
