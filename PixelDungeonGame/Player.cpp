@@ -94,10 +94,10 @@ int Player::get_y_pos() {
 	return pos_rect.y;
 }
 
-int Player::get_x_vel() {
-	return vel[0];
+std::vector<int> Player::get_pos() {
+	return std::vector<int>{pos_rect.x, pos_rect.y};
 }
 
-int Player::get_y_vel() {
-	return vel[1];
+std::vector<int> Player::get_vel() {
+	return vel;
 }
