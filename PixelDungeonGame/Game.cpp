@@ -49,11 +49,16 @@ void Game::render() {
 				layers[1].layer_tiles[i][j].collision_rect.w /= 2;
 			}
 			else if (map_num <= 244 && map_num >= 237) {
-				layers[1].layer_tiles[i][j].collision_rect.y = layers[1].layer_tiles[i][j].collision_rect.y + layers[1].layer_tiles[i][j].collision_rect.h / 2;
-				layers[1].layer_tiles[i][j].collision_rect.h /= 2;
+				layers[1].layer_tiles[i][j].collision_rect.y = layers[1].layer_tiles[i][j].collision_rect.y + (2 * layers[1].layer_tiles[i][j].collision_rect.h / 3);
+				layers[1].layer_tiles[i][j].collision_rect.h /= 3;
 			}
 
 			if (SDL_HasIntersection(&(player->collision_rect), &layers[1].layer_tiles[i][j].collision_rect)) {
+				player->vel_x = -(player->vel_x * 3);
+				player->vel_y = -(player->vel_y * 3);
+
+				player->update_position();
+
 				player->vel_x = 0;
 				player->vel_y = 0;
 				printf("asdfsadf\n");

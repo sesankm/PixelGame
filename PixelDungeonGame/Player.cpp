@@ -20,7 +20,6 @@ void Player::update_position() {
 		pos_rect.y += vel_y;
 	else if (vel_y < 0 && camera.y >= 0)
 		pos_rect.y += vel_y;
-
 	collision_rect = { pos_rect.x + 10, pos_rect.y + 20, pos_rect.w - 20, pos_rect.h - 20 };
 	camera.x = pos_rect.x + 70 - camera.w / 2;
 	camera.y = pos_rect.y + 70 - camera.h / 2;

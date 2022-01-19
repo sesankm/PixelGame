@@ -42,8 +42,8 @@ public:
 	void update();
 	void key_down(SDL_Keycode code);
 	void key_up(SDL_Keycode code);
-private:
 	void update_position();
+private:
 	void update_frame();
 };
 
