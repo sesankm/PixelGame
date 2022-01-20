@@ -16,12 +16,12 @@ enum class Direction {
 class GameObject {
 protected:
 	SDL_Renderer* renderer;
-	SDL_Rect pos_rect;
 	SDL_Rect frame_rect;
 	SDL_Texture* texture;
 	int texture_width, texture_height;
 	SDL_RendererFlip flip;
 public:
+	SDL_Rect pos_rect;
 	GameObject();
 	GameObject(SDL_Renderer* rend, char* sprite_sheet_path, int texture_rows, int texture_cols, int start_x, int start_y, int width, int height);
 	SDL_Rect collision_rect;
@@ -34,6 +34,8 @@ private:
 	int max_vel;
 	int frame_tick;
 	Direction dir;
+	GameObject weapon;
+	int weapon_offset;
 public:
 	int vel_x, vel_y;
 	SDL_Rect camera;

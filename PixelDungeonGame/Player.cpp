@@ -7,6 +7,9 @@ Player::Player(SDL_Renderer* rend, char* sprite_sheet_path) : GameObject(rend, s
 	vel_x = 0;
 	vel_y = 0;
 	update_position();
+	weapon_offset = -4;
+	// weapon_offset = pos_rect.w / 2 + 18;
+	weapon = GameObject(rend, (char*)"sword_.png", 1, 1, pos_rect.x + weapon_offset, pos_rect.y + 20, 20, 50);
 }
 
 void Player::update_position() {
@@ -40,7 +43,12 @@ void Player::update_frame() {
 void Player::update() {
 	Player::update_position();
 	Player::update_frame();
+
 	GameObject::update();
+
+	Player::weapon.pos_rect.x = pos_rect.x + weapon_offset;
+	Player::weapon.pos_rect.y = pos_rect.y + 20;
+	Player::weapon.update();
 }
 
 void Player::key_down(SDL_Keycode code) {
@@ -48,11 +56,13 @@ void Player::key_down(SDL_Keycode code) {
 		dir = Direction::Right;
 		vel_x = max_vel;
 		flip = SDL_FLIP_NONE;
+		weapon_offset = -4;
 	}
 	else if (code == SDLK_a) {
 		dir = Direction::Left;
 		vel_x = -max_vel;
 		flip = SDL_FLIP_HORIZONTAL;
+		weapon_offset = pos_rect.w / 2 + 18;
 	}
 	else if (code == SDLK_w) {
 		dir = Direction::Up;
