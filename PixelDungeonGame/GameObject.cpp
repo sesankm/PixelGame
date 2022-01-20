@@ -16,4 +16,13 @@ GameObject::GameObject(SDL_Renderer* rend, char* sprite_sheet_path, int texture_
 	pos_rect = { start_x, start_y, width, height };
 	frame_rect = { 0, 0, texture_width / texture_cols, texture_height / texture_rows };
 	collision_rect = {};
+	flip = SDL_RendererFlip::SDL_FLIP_NONE;
+}
+
+void GameObject::update() {
+	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
+}
+
+SDL_Rect GameObject::get_pos() {
+	return pos_rect;
 }

@@ -16,22 +16,23 @@ enum class Direction {
 class GameObject {
 protected:
 	SDL_Renderer* renderer;
-	SDL_Rect frame_rect;
 	SDL_Rect pos_rect;
+	SDL_Rect frame_rect;
 	SDL_Texture* texture;
 	int texture_width, texture_height;
+	SDL_RendererFlip flip;
 public:
 	GameObject();
 	GameObject(SDL_Renderer* rend, char* sprite_sheet_path, int texture_rows, int texture_cols, int start_x, int start_y, int width, int height);
 	SDL_Rect collision_rect;
-	virtual void update() = 0;
+	void update();
+	SDL_Rect get_pos();
 };
 
 class Player : public GameObject {
 private:
 	int max_vel;
 	int frame_tick;
-	SDL_RendererFlip flip;
 	Direction dir;
 public:
 	int vel_x, vel_y;
@@ -50,7 +51,13 @@ private:
 class Tile : public GameObject {
 public:
 	Tile(SDL_Renderer*, char*, int, int, int, int, int, int, int);
-	void update();
 	void reposition(SDL_Rect, int, int);
-	SDL_Rect get_pos();
+};
+
+class Child : public GameObject {
+	GameObject parent;
+public:
+	Child(GameObject o) {
+		parent = o;
+	}
 };

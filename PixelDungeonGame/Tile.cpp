@@ -17,11 +17,3 @@ void Tile::reposition(SDL_Rect camera, int vel_x, int vel_y) {
 	if (camera.y + camera.h >= 700 && vel_y > 0)
 		pos_rect.y -= 10;
 }
-
-void Tile::update() {
-	SDL_RenderCopy(renderer, texture, &frame_rect, &pos_rect);
-}
-
-SDL_Rect Tile::get_pos() {
-	return pos_rect;
-}

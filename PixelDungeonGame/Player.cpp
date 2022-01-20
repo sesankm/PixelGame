@@ -4,7 +4,6 @@ Player::Player(SDL_Renderer* rend, char* sprite_sheet_path) : GameObject(rend, s
 	max_vel = 10;
 	dir = Direction::Right;
 	frame_tick = 0;
-	flip = SDL_RendererFlip::SDL_FLIP_NONE;
 	vel_x = 0;
 	vel_y = 0;
 	update_position();
@@ -41,7 +40,7 @@ void Player::update_frame() {
 void Player::update() {
 	Player::update_position();
 	Player::update_frame();
-	SDL_RenderCopyEx(renderer, texture, &frame_rect, &pos_rect, 0, 0, flip);
+	GameObject::update();
 }
 
 void Player::key_down(SDL_Keycode code) {
