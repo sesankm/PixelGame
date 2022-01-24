@@ -9,3 +9,5 @@
 - Point Systems
 - Weapons
 - Crafting/Building
+
+![](gameplay.gif)
